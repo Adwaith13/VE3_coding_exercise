@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const { connectMongoDB } = require("./utils/mongoDBConnection");
 const authenticationRoute = require("./routes/auth");
+const taskRoute = require("./routes/tasks");
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/", authenticationRoute);
+app.use("/", taskRoute);
 
 app.listen(process.env.PORT, () => {
   console.log(`server running on port ${process.env.PORT}`);

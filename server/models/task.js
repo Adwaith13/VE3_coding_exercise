@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const taskSchema = new mongoose.Schema({
-  task_tilte: {
+  task_title: {
     type: String,
     required: true,
   },
