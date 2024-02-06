@@ -1,9 +1,12 @@
-import { useState } from "react";
-import { addTask } from "../api/addTask";
+import { useEffect, useState } from "react";
+import { updateTaskByID } from "../api/updateTaskByID";
+import { fetchTaskByID } from "../api/fetchTaskByID";
 import moment from "moment";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
-export default function AddTask() {
+export default function UpdateTask() {
+  const { id } = useParams();
   const [taskData, setTaskData] = useState({
     task_title: "",
     task_description: "",
@@ -13,13 +16,24 @@ export default function AddTask() {
     status: "",
   });
 
-  const [allTasks, setAllTasks] = useState([]);
+  useEffect(() => {
+    const fetchApibyID = async () => {
+      try {
+        const apiResult = await fetchTaskByID(id);
+        setTaskData(apiResult.data);
+        console.log(taskData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchApibyID();
+  }, []);
 
-  const postTask = async (e) => {
+  const updateTask = async (e) => {
     e.preventDefault();
     try {
-      const task = await addTask(taskData);
-      setAllTasks([...allTasks, task]);
+      const updateTask = await updateTaskByID(id, taskData);
+      console.log(updateTask);
       setTaskData({
         task_title: "",
         task_description: "",
@@ -35,11 +49,11 @@ export default function AddTask() {
 
   return (
     <div>
-      <h1>Add task</h1>
+      <h1>UpdateTask</h1>
       <Link to="/">
         <button>Home</button>
       </Link>
-      <form onSubmit={postTask}>
+      <form onSubmit={updateTask}>
         <span>Task Title</span>{" "}
         <input
           type="text"
