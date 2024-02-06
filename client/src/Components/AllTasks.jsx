@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import moment from "moment";
 import allTaskStyles from "../styles/allTasks.module.css";
 import { Link } from "react-router-dom";
+import AddBtn from "./AddBtn";
 
 export default function AllTasks() {
   const [data, setData] = useState([]);
@@ -14,7 +15,7 @@ export default function AllTasks() {
       try {
         const apiResult = await fetchAllTasks();
         setData(apiResult.data);
-        console.log(1);
+        console.log(data);
       } catch (error) {
         console.log(error);
       }
@@ -25,6 +26,7 @@ export default function AllTasks() {
   const deleteTask = async (id) => {
     try {
       const result = await deleteTaskByID(id);
+      console.log(result.data);
       const updatedData = data.filter((task) => task._id !== id);
       setData(updatedData);
     } catch (error) {
@@ -34,26 +36,34 @@ export default function AllTasks() {
 
   return (
     <div>
-      <h1>All Tasks</h1>
-      <Link to="/add">
-        <button>Add New Task</button>
-      </Link>
+      <Link to="/login" className={allTaskStyles.loginLink}>Login</Link>
+      <Link to="/register" className={allTaskStyles.registerLink}>Register</Link>
+      <h1 className={allTaskStyles.header}>All Tasks</h1>
+      <AddBtn />
       {data.map((task) => (
         <Fragment key={task._id}>
           <div className={allTaskStyles.taskContainer}>
-            <h1>Title:{task.task_title}</h1>
-            <h1>Description:{task.task_description}</h1>
-            <h1>Priority:{task.priority}</h1>
-            <h1>Status:{task.status}</h1>
-            <h1>Assigned To:{task.assigned_To}</h1>
-            <h1>Due:{moment(task.due_date).format("DD-MM-YYYY")}</h1>
+            <h1 className={allTaskStyles.title}>Title:{task.task_title}</h1>
+            <p className={allTaskStyles.priority}>Priority:{task.priority}</p>
+            <p className={allTaskStyles.status}>Status:{task.status}</p>
+            <p className={allTaskStyles.assigned_To}>
+              Assigned To:{task.assigned_To}
+            </p>
+            <p className={allTaskStyles.date}>
+              Due:{moment(task.due_date).format("DD-MM-YYYY")}
+            </p>
             <Link to={`/view/${task._id}`}>
-              <button>View Task</button>
+              <button className={allTaskStyles.viewBtn}>View Task</button>
             </Link>
             <Link to={`/update/${task._id}`}>
-              <button>Update Task</button>
+              <button className={allTaskStyles.updateBtn}>Update Task</button>
             </Link>
-            <button onClick={() => deleteTask(task._id)}>Delete Task</button>
+            <button
+              onClick={() => deleteTask(task._id)}
+              className={allTaskStyles.deleteBtn}
+            >
+              Delete Task
+            </button>
           </div>
         </Fragment>
       ))}

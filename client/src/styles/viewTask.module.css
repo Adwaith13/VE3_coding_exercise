@@ -1,0 +1,22 @@
+.head {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+  font-size: 2rem;
+}
+
+.title {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.8rem;
+  text-align: center;
+  text-decoration: underline;
+}
+
+.description,
+.status,
+.priority,
+.date,
+.assigned {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.2rem;
+  margin-left: 5%;
+}

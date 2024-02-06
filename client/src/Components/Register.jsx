@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { userRegister } from "../api/userRegister";
+import loginStyles from "../styles/login.module.css";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [registerData, setRegisterData] = useState({
@@ -23,9 +25,10 @@ export default function Register() {
 
   return (
     <div>
-      <h1>Register</h1>
-      <form onSubmit={register}>
+      <h1 className={loginStyles.header}>Register</h1>
+      <form onSubmit={register} className={loginStyles.form}>
         <input
+          className={loginStyles.email}
           type="email"
           name="email_id"
           value={registerData.email_id}
@@ -36,6 +39,7 @@ export default function Register() {
         ></input>
         <br />
         <input
+          className={loginStyles.password}
           type="password"
           name="password"
           value={registerData.password}
@@ -44,7 +48,16 @@ export default function Register() {
             setRegisterData({ ...registerData, password: e.target.value });
           }}
         ></input>
-        <button type="submit">Register</button>
+        <br />
+        <button type="submit" className={loginStyles.button}>
+          Register
+        </button>
+        <p className={loginStyles.user}>
+          Already Registered?
+          <Link to="/login" className={loginStyles.link}>
+            Login
+          </Link>
+        </p>
       </form>
     </div>
   );

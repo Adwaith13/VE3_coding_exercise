@@ -1,0 +1,12 @@
+.button{
+    margin-left: 82%;
+    margin-bottom: 3%;
+    display: inline-block;
+    text-decoration: none;
+    background-color: blueviolet;
+    color: white;
+    padding: 10px 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+    cursor: pointer;
+}

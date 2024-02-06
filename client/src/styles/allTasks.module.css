@@ -1,3 +1,105 @@
-.taskContainer{
-    border :2px solid black
+.header {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 2rem;
+  color: rgb(78, 78, 211);
+}
+
+.taskContainer {
+  border: 2px solid black;
+  margin-left: 10%;
+  width: 80%;
+  height: 10%;
+  margin-bottom: 4%;
+  background-color: rgb(190, 217, 217);
+  border-radius: 10px;
+}
+
+.title {
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.7rem;
+  color: rgb(59, 54, 54);
+}
+
+.priority {
+  margin-left: 5%;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  color: red;
+}
+
+.status,
+.assigned_To,
+.date {
+  margin-left: 5%;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  color: black;
+}
+
+.viewBtn {
+  margin-bottom: 3%;
+  margin-left: 5%;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: white;
+  color: rgb(52, 179, 247);
+  border: 1px solid black;
+  padding: 8px 5px;
+  border-radius: 5px;
+}
+
+.updateBtn {
+  margin-bottom: 3%;
+  margin-left: 3%;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: white;
+  color: rgb(52, 179, 247);
+  border: 1px solid black;
+  padding: 8px 5px;
+  border-radius: 5px;
+}
+
+.deleteBtn {
+  margin-bottom: 3%;
+  margin-left: 55%;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  background-color: white;
+  color: red;
+  border: 1px solid black;
+  padding: 8px 5px;
+  border-radius: 5px;
+}
+
+.viewBtn:hover,
+.updateBtn:hover {
+  background-color: rgb(88, 65, 241);
+  color: black;
+}
+
+.deleteBtn:hover {
+  background-color: red;
+  color: white;
+}
+
+.loginLink {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.2rem;
+  color: black;
+  text-decoration: none;
+  margin-left: 75%;
+}
+
+.registerLink {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.2rem;
+  color: black;
+  text-decoration: none;
+  margin-left: 2%;
 }
