@@ -88,7 +88,7 @@ router.get("/task/:id", async (req, res) => {
       data: findTaskByID,
     });
   } catch (error) {
-    console.log(erorr);
+    console.log(error);
     return res.status(500).json({
       status: "success",
       message: "Internal Server Error",
