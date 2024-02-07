@@ -104,6 +104,17 @@
   margin-left: 2%;
 }
 
+.logoutBtn{
+  cursor: pointer;
+  margin-left: 85%;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border: none;
+  color: red;
+  border-radius: 5px;
+}
+
 
 @media screen and (max-width:768px) {
   .taskContainer{

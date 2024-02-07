@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { updateTaskByID } from "../api/updateTaskByID";
 import { fetchTaskByID } from "../api/fetchTaskByID";
 import moment from "moment";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import HomeBtn from "./HomeBtn";
 import taskFormStyles from "../styles/taskForm.module.css";
 
@@ -11,10 +11,10 @@ export default function UpdateTask() {
   const [taskData, setTaskData] = useState({
     task_title: "",
     task_description: "",
-    priority: "",
+    priority: "Low",
     assigned_To: "",
     due_date: "",
-    status: "",
+    status: "Pending",
   });
 
   useEffect(() => {
@@ -28,21 +28,34 @@ export default function UpdateTask() {
       }
     };
     fetchApibyID();
-  }, [id, taskData]);
+  }, []);
+
+  const navigate = useNavigate();
 
   const updateTask = async (e) => {
     e.preventDefault();
     try {
-      const updateTask = await updateTaskByID(id, taskData);
+      const loginToken = localStorage.getItem("loginToken");
+      const registerToken = localStorage.getItem("registerToken");
+      const token = loginToken || registerToken;
+      if (!token) {
+        navigate("/login");
+      }
+      const updateTask = await updateTaskByID(id, taskData, token);
+
       console.log(updateTask);
+
       setTaskData({
         task_title: "",
         task_description: "",
-        priority: "",
+        priority: "Low",
         assigned_To: "",
         due_date: "",
-        status: "",
+        status: "Pending",
       });
+      if (updateTask) {
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -55,6 +68,7 @@ export default function UpdateTask() {
       <form onSubmit={updateTask} className={taskFormStyles.form}>
         <span className={taskFormStyles.label}>Task Title</span>{" "}
         <input
+          required={true}
           className={taskFormStyles.title}
           type="text"
           name="task_title"
@@ -67,6 +81,7 @@ export default function UpdateTask() {
         <br />
         <span className={taskFormStyles.label}>Task Description</span>{" "}
         <input
+          required={true}
           className={taskFormStyles.description}
           type="text"
           name="task_description"
@@ -79,15 +94,18 @@ export default function UpdateTask() {
         <br />
         <span className={taskFormStyles.label}>Priority</span>{" "}
         <select
-          className={taskFormStyles.priority}
           name="priority"
+          required={true}
+          className={taskFormStyles.priority}
           value={taskData.priority}
           onChange={(e) => {
             setTaskData({ ...taskData, priority: e.target.value });
           }}
           placeholder="priority"
         >
-          <option disabled>Select Priority</option>
+          <option disabled value="">
+            Select Priority
+          </option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
@@ -95,6 +113,7 @@ export default function UpdateTask() {
         <br />
         <span className={taskFormStyles.label}>Assign To</span>{" "}
         <input
+          required={true}
           className={taskFormStyles.assign}
           type="text"
           name="assigned_To"
@@ -107,6 +126,7 @@ export default function UpdateTask() {
         <br />
         <span className={taskFormStyles.label}>Due Date</span>{" "}
         <input
+          required={true}
           className={taskFormStyles.date}
           type="date"
           name="due_date"
@@ -121,22 +141,25 @@ export default function UpdateTask() {
         <br />
         <span className={taskFormStyles.label}>Status</span>{" "}
         <select
-          className={taskFormStyles.status}
           name="status"
+          required={true}
+          className={taskFormStyles.status}
           value={taskData.status}
           onChange={(e) => {
             setTaskData({ ...taskData, status: e.target.value });
           }}
           placeholder="status"
         >
-          <option disabled>Select Status</option>
+          <option disabled value="">
+            Select Status
+          </option>
           <option value="Pending">Pending</option>
           <option value="In Progress">In Progress</option>
           <option value="Complete">Complete</option>
         </select>
         <br />
         <button type="submit" className={taskFormStyles.addBtn}>
-          Add Task
+          Update Task
         </button>
       </form>
     </div>

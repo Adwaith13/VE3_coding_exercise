@@ -3,32 +3,44 @@ import { addTask } from "../api/addTask";
 import moment from "moment";
 import HomeBtn from "./HomeBtn";
 import taskFormStyles from "../styles/taskForm.module.css";
+import { useNavigate } from "react-router-dom";
 
 export default function AddTask() {
   const [taskData, setTaskData] = useState({
     task_title: "",
     task_description: "",
-    priority: "",
+    priority: "Low",
     assigned_To: "",
     due_date: "",
-    status: "",
+    status: "Pending",
   });
 
   const [allTasks, setAllTasks] = useState([]);
 
+  const navigate = useNavigate();
+
   const postTask = async (e) => {
     e.preventDefault();
     try {
-      const task = await addTask(taskData);
+      const loginToken = localStorage.getItem("loginToken");
+      const registerToken = localStorage.getItem("registerToken");
+      const token = loginToken || registerToken;
+      if (!token) {
+        navigate("/login");
+      }
+      const task = await addTask(token, taskData);
       setAllTasks([...allTasks, task]);
       setTaskData({
         task_title: "",
         task_description: "",
-        priority: "",
+        priority: "Low",
         assigned_To: "",
         due_date: "",
-        status: "",
+        status: "Pending",
       });
+      if (task) {
+        navigate("/");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -41,6 +53,7 @@ export default function AddTask() {
       <form onSubmit={postTask} className={taskFormStyles.form}>
         <span className={taskFormStyles.label}>Task Title</span>{" "}
         <input
+          required={true}
           className={taskFormStyles.title}
           type="text"
           name="task_title"
@@ -53,6 +66,7 @@ export default function AddTask() {
         <br />
         <span className={taskFormStyles.label}>Task Description</span>{" "}
         <input
+          required={true}
           className={taskFormStyles.description}
           type="text"
           name="task_description"
@@ -65,6 +79,7 @@ export default function AddTask() {
         <br />
         <span className={taskFormStyles.label}>Priority</span>{" "}
         <select
+          required={true}
           className={taskFormStyles.priority}
           name="priority"
           value={taskData.priority}
@@ -81,6 +96,7 @@ export default function AddTask() {
         <br />
         <span className={taskFormStyles.label}>Assign To</span>{" "}
         <input
+          required={true}
           className={taskFormStyles.assign}
           type="text"
           name="assigned_To"
@@ -93,6 +109,7 @@ export default function AddTask() {
         <br />
         <span className={taskFormStyles.label}>Due Date</span>{" "}
         <input
+          required={true}
           className={taskFormStyles.date}
           type="date"
           name="due_date"
@@ -107,6 +124,7 @@ export default function AddTask() {
         <br />
         <span className={taskFormStyles.label}>Status</span>{" "}
         <select
+          required={true}
           className={taskFormStyles.status}
           name="status"
           value={taskData.status}
@@ -121,7 +139,9 @@ export default function AddTask() {
           <option value="Complete">Complete</option>
         </select>
         <br />
-        <button type="submit" className={taskFormStyles.addBtn}>Add Task</button>
+        <button type="submit" className={taskFormStyles.addBtn}>
+          Add Task
+        </button>
       </form>
     </div>
   );

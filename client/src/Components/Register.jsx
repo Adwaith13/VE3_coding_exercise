@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { userRegister } from "../api/userRegister";
 import loginStyles from "../styles/login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
   const [registerData, setRegisterData] = useState({
@@ -9,10 +9,18 @@ export default function Register() {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const register = async (e) => {
     e.preventDefault();
     try {
       const user = await userRegister(registerData);
+      const loginToken = localStorage.getItem("loginToken");
+      const registerToken = localStorage.getItem("registerToken");
+      const token = loginToken || registerToken;
+      if (token) {
+        navigate("/");
+      }
       console.log(user);
       setRegisterData({
         email_id: "",
@@ -26,7 +34,7 @@ export default function Register() {
   return (
     <div>
       <h1 className={loginStyles.header}>Register</h1>
-      <form onSubmit={register} className={loginStyles.form}>
+      <form className={loginStyles.form}>
         <input
           className={loginStyles.email}
           type="email"
@@ -49,7 +57,7 @@ export default function Register() {
           }}
         ></input>
         <br />
-        <button type="submit" className={loginStyles.button}>
+        <button type="submit" className={loginStyles.button} onClick={register}>
           Register
         </button>
         <p className={loginStyles.user}>

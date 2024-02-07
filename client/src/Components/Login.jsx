@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { userLogin } from "../api/userLogin";
 import loginStyles from "../styles/login.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [loginData, setLoginData] = useState({
@@ -9,10 +9,18 @@ export default function Login() {
     password: "",
   });
 
+  const navigate = useNavigate();
+
   const login = async (e) => {
     e.preventDefault();
     try {
       const user = await userLogin(loginData);
+      const loginToken = localStorage.getItem("loginToken");
+      const registerToken = localStorage.getItem("registerToken");
+      const token = loginToken || registerToken;
+      if (token) {
+        navigate("/");
+      }
       console.log(user);
     } catch (error) {
       console.log(error);
@@ -22,7 +30,7 @@ export default function Login() {
   return (
     <div>
       <h1 className={loginStyles.header}>Login</h1>
-      <form onSubmit={login} className={loginStyles.form}>
+      <form className={loginStyles.form}>
         <input
           className={loginStyles.email}
           type="email"
@@ -45,13 +53,13 @@ export default function Login() {
           }}
         ></input>
         <br />
-        <button type="submit" className={loginStyles.button}>
+        <button type="submit" className={loginStyles.button} onClick={login}>
           Login
         </button>
         <p className={loginStyles.userLogin}>
           New User?
           <Link to="/register" className={loginStyles.link}>
-            Register 
+            Register
           </Link>
         </p>
       </form>
