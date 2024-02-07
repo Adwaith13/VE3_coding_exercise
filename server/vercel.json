@@ -119,7 +119,7 @@
             ],
             "headers": {
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "POST,OPTIONS,PUT",
+                "Access-Control-Allow-Methods": "GET, PUT, POST, OPTIONS",
                 "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
                 "Access-Control-Allow-Credentials": "true"
             }
@@ -134,7 +134,7 @@
             ],
             "headers": {
                 "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Methods": "GET,OPTIONS,DELETE",
+                "Access-Control-Allow-Methods": "GET, OPTIONS, DELETE",
                 "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
                 "Access-Control-Allow-Credentials": "true"
             }
