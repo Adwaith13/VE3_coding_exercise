@@ -20,6 +20,15 @@
 ##### jsonwebtoken: authenticating users
 ##### mongoose: Node.js ORM for MongoDB
 
+## To Install Backend Packages Install:
+##### npm i bcrypt 
+##### npm i express 
+##### npm i dotenv
+##### npm i mongoose 
+##### npm i body-parser
+##### npm i jsonwebtoken
+##### npm i cors
+
 ## Endpoints
 #### /register: registering users
 #### /login: logging users
