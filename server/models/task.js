@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+//task schema for storing task data
 const taskSchema = new mongoose.Schema({
   task_title: {
     type: String,
