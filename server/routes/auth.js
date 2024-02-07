@@ -29,7 +29,7 @@ router.post("/register", async (req, res) => {
       password: encryptedPassword,
     });
 
-    const registerToken = jwt.sign(createNewUser.toJSON(), process.env.key, {
+    const registerToken = jwt.sign(createNewUser.toJSON(), process.env.JWT_KEY, {
       expiresIn: 14400,
     });
 
@@ -79,7 +79,7 @@ router.post("/login", async (req, res) => {
       });
     }
 
-    const loginToken = jwt.sign(doesEmail_ID_Exist.toJSON(), process.env.key, {
+    const loginToken = jwt.sign(doesEmail_ID_Exist.toJSON(), process.env.JWT_KEY, {
       expiresIn: 14400,
     });
 

@@ -1,8 +1,9 @@
 const Task = require("../models/task");
 const express = require("express");
+const isUserAuthenticated = require("../middlewares/isUserAuthenticated");
 const router = express.Router();
 
-router.post("/task", async (req, res) => {
+router.post("/task", isUserAuthenticated, async (req, res) => {
   try {
     const {
       task_title,
@@ -96,7 +97,7 @@ router.get("/task/:id", async (req, res) => {
   }
 });
 
-router.put("/updatetask/:id", async (req, res) => {
+router.put("/updatetask/:id", isUserAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -152,7 +153,7 @@ router.put("/updatetask/:id", async (req, res) => {
   }
 });
 
-router.delete("/deletetask/:id", async (req, res) => {
+router.delete("/deletetask/:id", isUserAuthenticated, async (req, res) => {
   try {
     const { id } = req.params;
 
