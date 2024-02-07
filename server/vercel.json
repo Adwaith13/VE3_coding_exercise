@@ -1,0 +1,143 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "/index.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "/routes/auth.js",
+            "use": "@vercel/node"
+        },
+        {
+            "src": "/routes/tasks.js    ",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/index.js",
+            "methods": [
+                "GET",
+                "POST",
+                "PATCH",
+                "OPTIONS"
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PATCH,POST,OPTIONS",
+                "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+                "Access-Control-Allow-Credentials": "true"
+            }
+        },
+        {
+            "src": "/register",
+            "dest": "/auth.js",
+            "methods": [
+                "GET",
+                "POST",
+                "PATCH",
+                "OPTIONS"
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PATCH,POST,OPTIONS",
+                "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+                "Access-Control-Allow-Credentials": "true"
+            }
+        },
+        {
+            "src": "/login",
+            "dest": "/auth.js",
+            "methods": [
+                "GET",
+                "POST",
+                "PATCH",
+                "OPTIONS"
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PATCH,POST,OPTIONS",
+                "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+                "Access-Control-Allow-Credentials": "true"
+            }
+        },
+        {
+            "src": "/task",
+            "dest": "/tasks.js",
+            "methods": [
+                "GET",
+                "POST",
+                "PATCH",
+                "OPTIONS"
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PATCH,POST,OPTIONS",
+                "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+                "Access-Control-Allow-Credentials": "true"
+            }
+        },
+        {
+            "src": "/alltasks",
+            "dest": "/tasks.js",
+            "methods": [
+                "GET",
+                "PATCH",
+                "OPTIONS"
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PATCH,OPTIONS",
+                "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+                "Access-Control-Allow-Credentials": "true"
+            }
+        },
+        {
+            "src": "/task/:id",
+            "dest": "/tasks.js",
+            "methods": [
+                "GET",
+                "OPTIONS"
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST,OPTIONS",
+                "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+                "Access-Control-Allow-Credentials": "true"
+            }
+        },
+        {
+            "src": "/updatetask/:id",
+            "dest": "/tasks.js",
+            "methods": [
+                "GET",
+                "PUT",
+                "POST",
+                "OPTIONS"
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "POST,OPTIONS",
+                "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+                "Access-Control-Allow-Credentials": "true"
+            }
+        },
+        {
+            "src": "/deletetask/:id",
+            "dest": "/tasks.js",
+            "methods": [
+                "GET",
+                "OPTIONS",
+                "DELETE"
+            ],
+            "headers": {
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,OPTIONS",
+                "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+                "Access-Control-Allow-Credentials": "true"
+            }
+        }
+    ]
+}
