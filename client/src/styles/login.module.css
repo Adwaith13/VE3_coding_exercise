@@ -2,6 +2,7 @@
   font-family: "Roboto", sans-serif;
   text-align: center;
   font-size: 2rem;
+  margin-top: 10%;
 }
 
 .form {
@@ -59,4 +60,38 @@
   text-decoration: none;
   color: blue;
   margin-left: 1%;
+}
+
+@media screen and (max-width:768px) {
+  .header{
+    margin-top: 40%;
+  }
+  .form{
+    width: 100%;
+    margin-left: 5%;
+  }
+
+  .email{
+    width: 90%;
+    margin-bottom: 5%;
+  }
+
+  .password{
+    width: 90%;
+    margin-bottom: 5%;
+  }
+
+  .button{
+    margin-left: 32%;
+    width: 30%;
+  }
+
+  .userLogin{
+    margin-left: 30%;
+  }
+
+  .user{
+    margin-left: 22%;
+  }
+  
 }

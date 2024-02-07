@@ -101,3 +101,41 @@
   cursor: pointer;
   border-radius: 8px;
 }
+
+@media screen and (max-width: 768px) {
+  .label {
+    margin-left: 35%;
+  }
+  .title {
+    width: 80%;
+    margin-bottom: 5%;
+  }
+  .description {
+    width: 80%;
+    margin-left: 7%;
+    margin-bottom: 5%;
+  }
+  .priority {
+    margin-left: 8%;
+
+    width: 85%;
+  }
+  .assign {
+    margin-left: 10%;
+    width: 75%;
+    margin-bottom: 5%;
+  }
+  .date {
+    width: 80%;
+    margin-bottom: 5%;
+  }
+  .status {
+    width: 82%;
+    margin-bottom: 5%;
+  }
+
+  .addBtn{
+    margin-left: 25%;
+    width: 50%;
+  }
+}
