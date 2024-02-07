@@ -7,7 +7,10 @@ import HomeBtn from "./HomeBtn";
 import taskFormStyles from "../styles/taskForm.module.css";
 
 export default function UpdateTask() {
+  //extracing id from useParams hook
   const { id } = useParams();
+  
+  //handling state of task data
   const [taskData, setTaskData] = useState({
     task_title: "",
     task_description: "",
@@ -17,6 +20,7 @@ export default function UpdateTask() {
     status: "Pending",
   });
 
+  //fetching data of task which has to be updated using useEffect for side effect 
   useEffect(() => {
     const fetchApibyID = async () => {
       try {
@@ -33,14 +37,18 @@ export default function UpdateTask() {
   const navigate = useNavigate();
 
   const updateTask = async (e) => {
+    //preventing default behaviour of browser
     e.preventDefault();
     try {
+      //checking if token is available
       const loginToken = localStorage.getItem("loginToken");
       const registerToken = localStorage.getItem("registerToken");
       const token = loginToken || registerToken;
       if (!token) {
         navigate("/login");
       }
+      
+      //passing taskid ,data and token to update task
       const updateTask = await updateTaskByID(id, taskData, token);
 
       console.log(updateTask);

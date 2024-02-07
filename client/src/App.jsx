@@ -1,9 +1,11 @@
+//importing all components
 import AllTasks from "./Components/AllTasks";
 import AddTask from "./Components/AddTask";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import ViewTask from "./Components/ViewTask";
 import UpdateTask from "./Components/UpdateTask";
+//routing
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {

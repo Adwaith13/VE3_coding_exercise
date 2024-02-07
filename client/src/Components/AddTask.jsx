@@ -5,7 +5,9 @@ import HomeBtn from "./HomeBtn";
 import taskFormStyles from "../styles/taskForm.module.css";
 import { useNavigate } from "react-router-dom";
 
+//add task component
 export default function AddTask() {
+  //using state variables for task form
   const [taskData, setTaskData] = useState({
     task_title: "",
     task_description: "",
@@ -15,21 +17,31 @@ export default function AddTask() {
     status: "Pending",
   });
 
+  //state variable to update the tasks after adding new task
   const [allTasks, setAllTasks] = useState([]);
 
   const navigate = useNavigate();
 
+  //function to post task
   const postTask = async (e) => {
+    //preventing default behaviour of the browser
     e.preventDefault();
     try {
+      /*extracting login token or register token 
+      from localstorage and assigning to token variable */
       const loginToken = localStorage.getItem("loginToken");
       const registerToken = localStorage.getItem("registerToken");
       const token = loginToken || registerToken;
       if (!token) {
         navigate("/login");
       }
+
+      //adding task to function and passing token and task data
       const task = await addTask(token, taskData);
+
+      //setting newly added task to task state 
       setAllTasks([...allTasks, task]);
+      //resetting the form state
       setTaskData({
         task_title: "",
         task_description: "",
@@ -38,6 +50,7 @@ export default function AddTask() {
         due_date: "",
         status: "Pending",
       });
+      //if task is added navigate to home page
       if (task) {
         navigate("/");
       }

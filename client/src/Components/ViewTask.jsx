@@ -6,9 +6,14 @@ import HomeBtn from "./HomeBtn";
 import viewTaskStyle from "../styles/viewTask.module.css";
 
 export default function ViewTask() {
+  
+  //fetching id using params hook
   let { id } = useParams();
+
+  //handling task data state
   const [taskData, setTaskData] = useState([]);
 
+  //fetching task by id using useEffect for side effect 
   useEffect(() => {
     const fetchTask = async () => {
       try {

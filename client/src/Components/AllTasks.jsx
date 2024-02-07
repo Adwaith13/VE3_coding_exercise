@@ -9,8 +9,11 @@ import AddBtn from "./AddBtn";
 import { useNavigate } from "react-router-dom";
 
 export default function AllTasks() {
+
+  //initalizing state variables
   const [data, setData] = useState([]);
 
+  //fetching all tasks using useEffect for side effect 
   useEffect(() => {
     const fetchApi = async () => {
       try {
@@ -24,6 +27,7 @@ export default function AllTasks() {
     fetchApi();
   }, []);
 
+  //assigning token according to availabilty 
   let token;
   const loginToken = localStorage.getItem("loginToken");
   const registerToken = localStorage.getItem("registerToken");
@@ -33,8 +37,10 @@ export default function AllTasks() {
     token = registerToken;
   }
 
+  //use navigate hook for condtionally routing
   const navigate = useNavigate();
 
+  //if token is not present navigate user to login page
   const navigateLogin = (e) => {
     if (!token) {
       e.preventDefault();
@@ -42,23 +48,30 @@ export default function AllTasks() {
     }
   };
 
+  //function to delete task
   const deleteTask = async (id) => {
     try {
+      //calling the function and passing token and task id as parameters
       const result = await deleteTaskByID(token, id);
+      //if token not present navigate user to  
       if (!token) {
         navigate("/login");
       }
       console.log(result.data);
-      const updatedData = data.filter((task) => task._id !== id);
-      setData(updatedData);
+      //deleting the task from the task array
+      const updatedTask = data.filter((task) => task._id !== id);
+      setData(updatedTask);
     } catch (error) {
       console.log(error);
     }
   };
 
+  //state to check tokens for logout function
   const [updateToken, setToken] = useState(
     localStorage.getItem("loginToken") || localStorage.getItem("registerToken")
   );
+
+  //logout function
   const logout = () => {
     if (updateToken) {
       localStorage.removeItem("loginToken");

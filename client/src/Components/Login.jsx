@@ -4,6 +4,8 @@ import loginStyles from "../styles/login.module.css";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+
+  //state to handle login data
   const [loginData, setLoginData] = useState({
     email_id: "",
     password: "",
@@ -11,13 +13,18 @@ export default function Login() {
 
   const navigate = useNavigate();
 
+  //login function
   const login = async (e) => {
+    //preventing default behaviour of the browser
     e.preventDefault();
     try {
+      //passing users data
       const user = await userLogin(loginData);
+      //checking for token 
       const loginToken = localStorage.getItem("loginToken");
       const registerToken = localStorage.getItem("registerToken");
       const token = loginToken || registerToken;
+       //if token found then navigate to home
       if (token) {
         navigate("/");
       }
